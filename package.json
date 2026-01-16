@@ -1,0 +1,40 @@
+{
+  "name": "rainbow-epay-sdk",
+  "version": "1.0.1",
+  "description": "A TypeScript SDK for the EasyPay interface, utilizing Axios for requests.",
+  "type": "module",
+  "main": "dist/index.umd.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "easypay",
+    "sdk",
+    "payment",
+    "typescript",
+    "axios"
+  ],
+  "author": "sqiao7",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sqiao7/easypay-node-sdk"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4",
+    "vite-plugin-dts": "^4.5.0",
+    "@types/node": "^22.10.7"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
+  }
+}
