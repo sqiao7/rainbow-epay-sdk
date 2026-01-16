@@ -1,6 +1,6 @@
 {
   "name": "rainbow-epay-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A TypeScript SDK for the EasyPay interface, utilizing Axios for requests.",
   "type": "module",
   "main": "dist/index.umd.cjs",
@@ -26,7 +26,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sqiao7/easypay-node-sdk"
+    "url": "https://github.com/sqiao7/rainbow-epay-sdk"
   },
   "devDependencies": {
     "typescript": "~5.9.3",
