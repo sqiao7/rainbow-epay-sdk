@@ -1,6 +1,6 @@
 {
   "name": "rainbow-epay-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A TypeScript SDK for the EasyPay interface, utilizing Axios for requests.",
   "type": "module",
   "main": "dist/index.umd.cjs",

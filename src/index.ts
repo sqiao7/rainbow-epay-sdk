@@ -17,6 +17,7 @@ export interface PaymentArgs {
   name: string;
   money: string;
   sitename?: string;
+  params?: string;
   [key: string]: any;
 }
 
@@ -186,12 +187,13 @@ export class EasyPay {
   /**
    * API-Query Single Order
    */
-  public async order(out_trade_no: string): Promise<any> {
+  public async order(out_trade_no?: string, trade_no?: string): Promise<any> {
     const config = {
       act: "order",
       pid: this.pid,
       key: this.key,
       out_trade_no,
+      trade_no,
     };
     try {
       const { data } = await this.instance.get("/api.php", { params: config });
