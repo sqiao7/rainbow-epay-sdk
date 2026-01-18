@@ -8,11 +8,10 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "EasyPay",
       fileName: "index",
+      formats: ["es", "cjs", "umd"],
     },
     rollupOptions: {
-      // Make sure externalize deps that shouldn't be bundled
-      // into your library
-      external: ["axios", "crypto", "events", "util", "stream", "buffer"],
+      external: ["axios"],
       output: {
         globals: {
           axios: "axios",

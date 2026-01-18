@@ -1,5 +1,5 @@
 import axios, { type AxiosInstance } from "axios";
-import { createHash } from "crypto";
+import md5 from "md5";
 
 export interface EasyPayConfig {
   domain: string;
@@ -24,6 +24,31 @@ export interface PaymentArgs {
 export interface APIPaymentArgs extends PaymentArgs {
   clientip?: string;
   device?: "pc" | "mobile" | "qq" | "wechat" | "alipay";
+}
+
+export interface MapiResponse {
+  code: string;
+  msg: string;
+  trade_no: string;
+  payurl?: string;
+  qrcode?: string;
+  urlscheme?: string;
+}
+
+export interface OrderQueryResponse {
+  code: string;
+  msg: string;
+  trade_no: string;
+  out_trade_no: string;
+  type: string;
+  pid: number;
+  addtime: string;
+  endtime: string;
+  name: string;
+  money: string;
+  status: string;
+  params: string;
+  buyer: string;
 }
 
 export class EasyPay {
@@ -69,11 +94,8 @@ export class EasyPay {
     return sortedObj;
   }
 
-  /**
-   * Encrypt string with MD5
-   */
   private md5(content: string): string {
-    return createHash("md5").update(content).digest("hex");
+    return md5(content);
   }
 
   /**
@@ -133,7 +155,7 @@ export class EasyPay {
    * API Payment (mapi.php)
    * Returns JSON response with payurl or qrcode
    */
-  public async mapi(args: APIPaymentArgs): Promise<any> {
+  public async mapi(args: APIPaymentArgs): Promise<MapiResponse> {
     const config = this.mergeArgs(args);
     const sign = this.generateSign(config);
 
@@ -144,7 +166,7 @@ export class EasyPay {
 
     try {
       const { data } = await this.instance.post("/mapi.php", params);
-      return data;
+      return data as MapiResponse;
     } catch (error) {
       throw error;
     }
@@ -187,7 +209,10 @@ export class EasyPay {
   /**
    * API-Query Single Order
    */
-  public async order(out_trade_no?: string, trade_no?: string): Promise<any> {
+  public async order(
+    out_trade_no?: string,
+    trade_no?: string,
+  ): Promise<OrderQueryResponse> {
     const config = {
       act: "order",
       pid: this.pid,
@@ -197,7 +222,7 @@ export class EasyPay {
     };
     try {
       const { data } = await this.instance.get("/api.php", { params: config });
-      return data;
+      return data as OrderQueryResponse;
     } catch (error) {
       throw error;
     }
@@ -226,7 +251,7 @@ export class EasyPay {
   public async refund(
     trade_no: string | null,
     out_trade_no?: string,
-    money?: string
+    money?: string,
   ): Promise<any> {
     if (!trade_no && !out_trade_no) {
       throw new Error("Either trade_no or out_trade_no is required");

@@ -1,6 +1,6 @@
-# EasyPay Node SDK (TypeScript)
+# EasyPay SDK (TypeScript, Node & Browser)
 
-A TypeScript SDK for the EasyPay interface, utilizing Axios for requests.
+A TypeScript SDK for the EasyPay interface, utilizing Axios for requests. Supports Node.js and modern browsers.
 
 ## Installation
 
@@ -89,6 +89,22 @@ async function undoOrder() {
 - `order(out_trade_no)`: Single Order Query
 - `orders()`: Batch Order Query
 - `refund(trade_no, out_trade_no, money)`: Refund
+
+## Test
+
+Run the basic test case:
+
+```bash
+npm test
+```
+
+This will:
+
+1. Build the SDK
+2. Run `test/basic.cjs`, which:
+   - Creates an `EasyPay` instance
+   - Generates a payment URL
+   - Asserts the URL format and prints it
 
 ## License
 MIT
